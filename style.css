@@ -396,6 +396,7 @@ input[type="text"] {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    z-index: 0;
 }
 
 .end_form_header {
@@ -447,28 +448,10 @@ input[type="text"] {
 }
 
 .end_form button {
-    font-size: 20px;
-    background-color: white;
-    border: 1px solid black;
-    padding: .35em .5em;
-    cursor: pointer;
-}
-
-.start_again {
-    width: 55%;
-    margin: 1%;
-}
-
-.button_score_end,
-.next_round {
-    margin: 1%;
-}
-
-.end_form button {
     cursor: pointer;
     margin-left: 5px;
     margin-bottom: 15px;
-    text-shadow: 0 -2px 0 #4a8a65, 0 1px 1px #c2dece;
+    text-transform: uppercase;
     box-sizing: border-box;
     font-size: 25px;
     text-decoration: none;
@@ -485,37 +468,6 @@ input[type="text"] {
     top: 0;
     transition: all 0.06s ease-out;
     position: relative;
-}
-
-@media(max-width: 850px) {
-    .end_form button {
-        font-size: 17px;
-        padding: 0;
-    }
-    .start_game {
-        font-size: 20px;
-        padding: 0;
-        width: 70%;
-    }
-    .popout {
-        font-size: 40px;
-    }
-}
-
-@media(max-width: 450px) {
-    .end_form button {
-        font-size: 12px;
-        padding: 0;
-        text-shadow: 0 -1px 0 #4a8a65, 0 1px 1px #c2dece;
-    }
-    .popout {
-        font-size: 20px;
-    }
-    .start_game {
-        font-size: 20px;
-        padding: 0;
-        width: 80%;
-    }
 }
 
 .end_form button:visited {
@@ -762,4 +714,37 @@ ul li:active:before {
 ul li a:hover {
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
+}
+
+@media(max-width: 850px) {
+    .end_form button {
+        font-size: 17px;
+        padding: 0;
+        width: 55%;
+        margin-top: 3vh;
+    }
+    .start_game {
+        font-size: 20px;
+        padding: 0;
+        width: 70%;
+    }
+    .popout {
+        font-size: 40px;
+    }
+}
+
+@media(max-width: 450px) {
+    .end_form button {
+        font-size: 12px;
+        padding: 0;
+        text-shadow: 0 -1px 0 #4a8a65, 0 1px 1px #c2dece;
+    }
+    .popout {
+        font-size: 20px;
+    }
+    .start_game {
+        font-size: 20px;
+        padding: 0;
+        width: 80%;
+    }
 }

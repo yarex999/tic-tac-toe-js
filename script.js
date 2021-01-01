@@ -25,11 +25,14 @@ let playerWin;
 const burger = document.getElementById('burger');
 const ul = document.querySelector('nav ul');
 
+
+// menu item for mobile version
 burger.addEventListener('click', () => {
     burger.classList.toggle('show-x');
     ul.classList.toggle('show');
 });
 
+// buttons 
 buttonStartTicTacToe.addEventListener('click', function() {
     let check = Array.from(inputPlayers).every(elem => elem.value);
     console.log(check);
@@ -40,75 +43,12 @@ buttonStartTicTacToe.addEventListener('click', function() {
         players2.push(inputPlayers[0].value);
         players2.push(inputPlayers[1].value);
 
-
-
         startFormDiv.classList.remove('display_flex');
         startFormDiv.classList.add('display_none');
     } else {
         alert('enter your names');
     }
 })
-
-
-
-start();
-
-function start() {
-
-
-    for (let i = 0; i < 9; i++) {
-        let newCell = document.createElement('div');
-        newCell.classList.add('cell');
-        mainTable.appendChild(newCell);
-    }
-
-    mainTable.classList.add('x');
-
-    let cells = mainTable.querySelectorAll('.cell');
-
-    let i = 0;
-    for (let cell of cells) {
-        cell.addEventListener('click', function step() {
-            current = ['x', 'circle'][i % 2];
-            if (current == 'x') {
-                cell.classList.add('x');
-            } else if (current == 'circle') {
-                cell.classList.add('circle');
-            }
-            if (mainTable.classList.contains('x')) {
-                mainTable.classList.remove('x');
-                mainTable.classList.add('circle');
-                currentClass = 'circle';
-            } else if (mainTable.classList.contains('circle')) {
-                mainTable.classList.remove('circle');
-                mainTable.classList.add('x');
-                currentClass = 'x';
-            }
-            player.innerHTML = 'Next step ' + players1[i % 2] + ' - ' + currentClass;
-            playerWin = players2[i % 2];
-            i++
-            this.removeEventListener('click', step);
-
-            if (isVictory(cells)) {
-                scoreTable.push(playerWin);
-                builScoreTable(scoreTable);
-                endFormDiv.classList.remove("display_none");
-                endFormDiv.classList.add("display_flex");
-
-
-                endFormWinner.innerHTML = playerWin + ' won this round!';
-            } else if (i == 9) {
-                scoreTable.push('it is draw');
-                builScoreTable(scoreTable);
-                endFormDiv.classList.remove("display_none");
-                endFormDiv.classList.add("display_flex");
-                endFormWinner.innerHTML = 'It is draw';
-
-
-            }
-        })
-    }
-}
 
 startAgainButton.addEventListener('click', function() {
     startFormDiv.classList.remove('display_none');
@@ -153,6 +93,71 @@ nextRoundButton.addEventListener('click', function() {
 })
 
 
+
+
+
+start();
+// main function of the game
+function start() {
+
+    // create a table
+    for (let i = 0; i < 9; i++) {
+        let newCell = document.createElement('div');
+        newCell.classList.add('cell');
+        mainTable.appendChild(newCell);
+    }
+
+    mainTable.classList.add('x');
+
+    let cells = mainTable.querySelectorAll('.cell');
+
+    // add a function to each cell
+    let i = 0;
+    for (let cell of cells) {
+        cell.addEventListener('click', function step() {
+            current = ['x', 'circle'][i % 2];
+            if (current == 'x') {
+                cell.classList.add('x');
+            } else if (current == 'circle') {
+                cell.classList.add('circle');
+            }
+            if (mainTable.classList.contains('x')) {
+                mainTable.classList.remove('x');
+                mainTable.classList.add('circle');
+                currentClass = 'circle';
+            } else if (mainTable.classList.contains('circle')) {
+                mainTable.classList.remove('circle');
+                mainTable.classList.add('x');
+                currentClass = 'x';
+            }
+            player.innerHTML = 'Next step ' + players1[i % 2] + ' - ' + currentClass;
+            playerWin = players2[i % 2];
+            i++
+            this.removeEventListener('click', step);
+
+            if (isVictory(cells)) {
+                scoreTable.push(playerWin);
+                builScoreTable(scoreTable);
+                endFormDiv.classList.remove("display_none");
+                endFormDiv.classList.add("display_flex");
+
+
+                endFormWinner.innerHTML = playerWin + ' won this round!';
+            } else if (i == 9) {
+                scoreTable.push('it is draw');
+                builScoreTable(scoreTable);
+                endFormDiv.classList.remove("display_none");
+                endFormDiv.classList.add("display_flex");
+                endFormWinner.innerHTML = 'It is draw';
+
+
+            }
+        })
+    }
+}
+
+
+// check the winner of this round
 function isVictory(cells) {
     let combs = [
         [0, 1, 2],
@@ -176,7 +181,7 @@ function isVictory(cells) {
     return false;
 }
 
-
+// build the table of the winners of this game
 function builScoreTable(arr) {
 
     let scoresTableChilds = scoreTableDiv.querySelectorAll('tr');
@@ -220,10 +225,7 @@ function builScoreTable(arr) {
 
 }
 
-
-
-
-
+// to know who is the absolute winner of all rounds
 buttonScoreEnd.addEventListener('click', function func() {
     let y = 0;
     let x = 0;
@@ -264,6 +266,9 @@ buttonScoreEnd.addEventListener('click', function func() {
     for (let elem of mainTableChilds) {
         elem.remove();
     }
+
     start();
+
+    Array.from(inputPlayers).forEach(elem => elem.value = '');
 
 });
